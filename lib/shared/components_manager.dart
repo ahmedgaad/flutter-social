@@ -19,7 +19,7 @@ Widget defaultFormField({
   GestureTapCallback? onTap,
 }) =>
     Container(
-      height: 90.0,
+      height: 72.0,
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
@@ -32,7 +32,7 @@ Widget defaultFormField({
           labelText: labelText,
           prefixIcon: Icon(
             prefix,
-            size: 30.0.sp,
+            size: 27.0.sp,
           ),
           suffixIcon: IconButton(
             onPressed: suffixPressed,
@@ -44,7 +44,7 @@ Widget defaultFormField({
             borderRadius: BorderRadius.circular(25.0),
           ),
         ),
-        cursorColor: Colors.deepOrange,
+        // cursorColor: Colors.deepOrange,
         cursorRadius: const Radius.circular(30.0),
       ),
     );
@@ -55,7 +55,7 @@ Widget defaultButton({
   double width = double.infinity,
   Color color = Colors.blue,
   double height = 40.0,
-  double radius = 0.0,
+  double radius = 7.0,
   bool isUpper = true,
   required String text,
   required VoidCallback function,
