@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SocialCubit()..getUserData(),
+      create: (context) => SocialCubit()..getUserData()..getPostsData(),
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,

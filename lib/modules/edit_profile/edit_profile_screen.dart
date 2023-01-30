@@ -58,7 +58,7 @@ class EditProfileScreen extends StatelessWidget {
                 },
                 child: Text(
                   "update".toUpperCase(),
-                  style: const TextStyle(fontSize: 17.0),
+                  style: const TextStyle(fontSize: 16.0),
                 ),
               ),
               const SizedBox(

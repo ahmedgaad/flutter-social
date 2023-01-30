@@ -1,5 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_social/layout/cubit/social_cubit.dart';
+import 'package:flutter_social/layout/cubit/social_state.dart';
+import 'package:flutter_social/models/post_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../shared/styles/icon_broken.dart';
@@ -7,244 +10,277 @@ import '../../../shared/styles/icon_broken.dart';
 class BuildPostItem extends StatelessWidget {
   const BuildPostItem({
     super.key,
+    required this.postModel,
+    required this.index,
   });
 
+  final PostModel postModel;
+  final int index;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      elevation: 5.0,
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Row(
+    return BlocBuilder<SocialCubit, SocialStates>(
+      builder: (context, state) {
+        return Card(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          elevation: 5.0,
+          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CircleAvatar(
-                      radius: 30.0,
-                      backgroundImage: NetworkImage(
-                          "https://img.freepik.com/free-photo/charming-overjoyed-feminine-girl-makes-rock-n-roll-gesture-feels-carefree-glad-listens-favourite-music_273609-39066.jpg?w=996&t=st=1674909668~exp=1674910268~hmac=016ae1f360db2d17aa3d257e1a3f5cc3c9e7d76ec8765d5e075cdee85ecb26c7"),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage: NetworkImage("${postModel.image}"),
+                        ),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    '${postModel.name}',
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: GoogleFonts.andika(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 5.0,
+                                  ),
+                                  const Icon(
+                                    Icons.verified_sharp,
+                                    color: Colors.blue,
+                                    size: 18.0,
+                                  ),
+                                ],
+                              ),
                               Text(
-                                'Ahmed Gad',
-                                style: GoogleFonts.andika(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16.0),
-                              ),
-                              const SizedBox(
-                                width: 5.0,
-                              ),
-                              const Icon(
-                                Icons.verified_sharp,
-                                color: Colors.blue,
-                                size: 18.0,
-                              ),
+                                "${postModel.dateTime}",
+                                style: Theme.of(context).textTheme.bodySmall,
+                              )
                             ],
                           ),
-                          Text(
-                            "January 28, 2023 at 11:00 pm",
-                            style: Theme.of(context).textTheme.bodySmall,
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 35.0,
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.more_horiz),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 1.0,
-                    color: Colors.grey[300],
-                  ),
-                ),
-                Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                  style: GoogleFonts.poppins(),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(
-                    top: 5.0,
-                    bottom: 10.0,
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Wrap(
-                      children: [
-                        Padding(
-                          padding:
-                              const EdgeInsetsDirectional.only(end: 4.0),
-                          child: SizedBox(
-                            height: 25.0,
-                            child: MaterialButton(
-                              onPressed: () {},
-                              minWidth: 1.0,
-                              padding: EdgeInsets.zero,
-                              child: Text(
-                                "#Software",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Colors.blue,
-                                        fontSize: 15.0),
-                              ),
-                            ),
-                          ),
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsetsDirectional.only(end: 4.0),
-                          child: SizedBox(
-                            height: 25.0,
-                            child: MaterialButton(
-                              onPressed: () {},
-                              minWidth: 1.0,
-                              padding: EdgeInsets.zero,
-                              child: Text(
-                                "#Flutter",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Colors.blue,
-                                        fontSize: 15.0),
-                              ),
-                            ),
-                          ),
-                        )
+                        const SizedBox(
+                          width: 35.0,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.more_horiz),
+                        ),
                       ],
                     ),
-                  ),
-                ),
-                Container(
-                  height: 160.0,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          "https://img.freepik.com/free-vector/group-discussion-concept-illustration_114360-8522.jpg?w=996&t=st=1674908727~exp=1674909327~hmac=13ad991b67da8ad43da5a5a3dccaa07d796d112c4f73af081303139bf2e8e160",
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 1.0,
+                        color: Colors.grey[300],
                       ),
-                      borderRadius: BorderRadius.circular(4.0)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {},
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  IconBroken.Heart,
-                                  size: 16.0,
-                                  color: Colors.red,
-                                ),
-                                const SizedBox(
-                                  width: 5.0,
-                                ),
-                                Text(
-                                  "1200",
-                                  style:
-                                      Theme.of(context).textTheme.bodySmall,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                    ),
+
+                    ///text of post
+                    ///
+                    Text(
+                      "${postModel.text}",
+                      style: GoogleFonts.poppins(),
+                    ),
+
+                    ///tags
+                    ///
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                        top: 5.0,
+                        bottom: 10.0,
                       ),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {},
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                const Icon(
-                                  IconBroken.Chat,
-                                  size: 16.0,
-                                  color: Colors.amber,
-                                ),
-                                const SizedBox(
-                                  width: 5.0,
-                                ),
-                                Text(
-                                  "600 comment",
-                                  style:
-                                      Theme.of(context).textTheme.bodySmall,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(bottom: 8.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 1.0,
-                    color: Colors.grey[300],
-                  ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: (){},
-                        child: Row(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Wrap(
                           children: [
-                            const CircleAvatar(
-                              radius: 18.0,
-                              backgroundImage: NetworkImage(
-                                  "https://img.freepik.com/free-photo/charming-overjoyed-feminine-girl-makes-rock-n-roll-gesture-feels-carefree-glad-listens-favourite-music_273609-39066.jpg?w=996&t=st=1674909668~exp=1674910268~hmac=016ae1f360db2d17aa3d257e1a3f5cc3c9e7d76ec8765d5e075cdee85ecb26c7"),
+                            Padding(
+                              padding:
+                                  const EdgeInsetsDirectional.only(end: 4.0),
+                              child: SizedBox(
+                                height: 25.0,
+                                child: MaterialButton(
+                                  onPressed: () {},
+                                  minWidth: 1.0,
+                                  padding: EdgeInsets.zero,
+                                  child: Text(
+                                    "#Software",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                            color: Colors.blue, fontSize: 15.0),
+                                  ),
+                                ),
+                              ),
                             ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Text(
-                              "Write a comment ...",
-                              style: Theme.of(context).textTheme.bodySmall,
+                            Padding(
+                              padding:
+                                  const EdgeInsetsDirectional.only(end: 4.0),
+                              child: SizedBox(
+                                height: 25.0,
+                                child: MaterialButton(
+                                  onPressed: () {},
+                                  minWidth: 1.0,
+                                  padding: EdgeInsets.zero,
+                                  child: Text(
+                                    "#Flutter",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                            color: Colors.blue, fontSize: 15.0),
+                                  ),
+                                ),
+                              ),
                             )
                           ],
                         ),
                       ),
                     ),
-                    InkWell(
-                          onTap: () {},
+
+                    ///post image
+                    ///
+                    if (postModel.postImage != '')
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(
+                          top: 5.0,
+                        ),
+                        child: Container(
+                          height: 160.0,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  "${postModel.postImage}",
+                                ),
+                              ),
+                              borderRadius: BorderRadius.circular(4.0)),
+                        ),
+                      ),
+
+                    ///Like and Comment Buttons
+                    ///
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      IconBroken.Heart,
+                                      size: 16.0,
+                                      color: Colors.red,
+                                    ),
+                                    const SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    Text(
+                                      "${SocialCubit.get(context).likes[index]}",
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    const Icon(
+                                      IconBroken.Chat,
+                                      size: 16.0,
+                                      color: Colors.amber,
+                                    ),
+                                    const SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    Text(
+                                      "0 comment",
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    ///Divider
+                    ///
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(bottom: 8.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 1.0,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+
+                    ///Write a comment and like button
+                    ///
+                    Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 18.0,
+                                  backgroundImage: NetworkImage(
+                                      "${SocialCubit.get(context).userModel?.image}"),
+                                ),
+                                const SizedBox(
+                                  width: 10.0,
+                                ),
+                                Text(
+                                  "Write a comment ...",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            SocialCubit.get(context).likePost(SocialCubit.get(context).postIds[index]);
+                          },
                           child: Row(
                             children: [
                               const Icon(
                                 IconBroken.Heart,
-                                size: 16.0,
+                                size: 18.0,
                                 color: Colors.red,
                               ),
                               const SizedBox(
@@ -252,19 +288,22 @@ class BuildPostItem extends StatelessWidget {
                               ),
                               Text(
                                 "Like",
-                                style:
-                                    Theme.of(context).textTheme.bodySmall,
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontSize: 13
+                                ),
                               ),
                             ],
                           ),
                         ),
+                      ],
+                    ),
                   ],
                 ),
-              ],
-            ),
-          )
-        ],
-      ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
