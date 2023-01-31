@@ -43,10 +43,13 @@ class EditProfileScreen extends StatelessWidget {
             ),
             titleSpacing: 5.0,
             leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(IconBroken.Arrow_Left_2)),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                IconBroken.Arrow_Left_2,
+              ),
+            ),
             actions: [
               TextButton(
                 onPressed: () {
@@ -202,8 +205,8 @@ class EditProfileScreen extends StatelessWidget {
                                 ),
                                 if (state is SocialUpdateUserDataLoadingState)
                                   const SizedBox(
-                                  height: 5.0,
-                                ),
+                                    height: 5.0,
+                                  ),
                                 if (state is SocialUpdateUserDataLoadingState)
                                   const LinearProgressIndicator(),
                               ],

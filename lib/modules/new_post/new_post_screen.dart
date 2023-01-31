@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_social/layout/cubit/social_cubit.dart';
+import 'package:flutter_social/modules/feeds/feeds_screen.dart';
+import 'package:flutter_social/shared/components_manager.dart';
 import 'package:flutter_social/shared/styles/icon_broken.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -55,6 +57,7 @@ class NewPostScreen extends StatelessWidget {
                       text: textController.text,
                     );
                   }
+                  navigateAndFinish(context, const FeedsScreen());
                 },
                 child: Text(
                   'post'.toUpperCase(),
@@ -76,10 +79,10 @@ class NewPostScreen extends StatelessWidget {
                   const SizedBox(height: 5.0,),
                 Row(
                   children: [
-                    const CircleAvatar(
+                     CircleAvatar(
                       radius: 30.0,
                       backgroundImage: NetworkImage(
-                          "https://img.freepik.com/free-photo/charming-overjoyed-feminine-girl-makes-rock-n-roll-gesture-feels-carefree-glad-listens-favourite-music_273609-39066.jpg?w=996&t=st=1674909668~exp=1674910268~hmac=016ae1f360db2d17aa3d257e1a3f5cc3c9e7d76ec8765d5e075cdee85ecb26c7"),
+                          "${cubit.userModel?.image}"),
                     ),
                     const SizedBox(
                       width: 10.0,
@@ -91,7 +94,7 @@ class NewPostScreen extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Ahmed Gad',
+                                '${cubit.userModel?.name}',
                                 style: GoogleFonts.andika(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16.0),
