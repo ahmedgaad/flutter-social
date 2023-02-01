@@ -57,11 +57,10 @@ class NewPostScreen extends StatelessWidget {
                       text: textController.text,
                     );
                   }
-                  navigateAndFinish(context, const FeedsScreen());
                 },
                 child: Text(
                   'post'.toUpperCase(),
-                  style: const TextStyle(fontSize: 16.0),
+                  style: const TextStyle(fontSize: 16.0,),
                 ),
               ),
               const SizedBox(

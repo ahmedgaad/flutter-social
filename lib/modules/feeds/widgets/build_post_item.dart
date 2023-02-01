@@ -35,7 +35,7 @@ class BuildPostItem extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 30.0,
-                          backgroundImage: NetworkImage("${postModel.image}"),
+                          backgroundImage: NetworkImage("${SocialCubit.get(context).userModel?.image}"),
                         ),
                         const SizedBox(
                           width: 10.0,

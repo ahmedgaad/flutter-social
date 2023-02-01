@@ -37,7 +37,7 @@ class SettingScreen extends StatelessWidget {
                               "${userModel?.cover}",
                             ),
                           ),
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(4.0),
                             topRight: Radius.circular(4.0),
                           ),

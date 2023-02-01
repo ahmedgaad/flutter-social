@@ -67,7 +67,7 @@ class ChatDetailsScreen extends StatelessWidget {
               ),
             ),
             body: ConditionalBuilder(
-              condition: SocialCubit.get(context).messages.length > 0,
+              condition: SocialCubit.get(context).messages.length >= 0,
               builder: (BuildContext context) {
                 return Padding(
                   padding: const EdgeInsets.all(14.0),
@@ -85,7 +85,7 @@ class ChatDetailsScreen extends StatelessWidget {
                                 messageModel: message,
                               );
                             }
-                            return BuildMyMessageItem(messageModel: message);
+                            return BuildMyMessageItem(messageModel: message,);
                           },
                           separatorBuilder: (context, index) => const SizedBox(
                             height: 15.0,
