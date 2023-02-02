@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_social/layout/cubit/social_cubit.dart';
 import 'package:flutter_social/layout/social_layout.dart';
+import 'package:flutter_social/modules/native_code.dart';
 import 'package:flutter_social/shared/components_manager.dart';
 import 'package:flutter_social/shared/constants_manager.dart';
 import 'package:flutter_social/shared/local/cache_helper.dart';
@@ -80,7 +81,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: "Social",
-            home: startWidget,
+            home: NativeCode(),
           );
         },
       ),
