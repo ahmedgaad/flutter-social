@@ -1,8 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_social/layout/cubit/social_cubit.dart';
-import 'package:flutter_social/modules/feeds/feeds_screen.dart';
-import 'package:flutter_social/shared/components_manager.dart';
 import 'package:flutter_social/shared/styles/icon_broken.dart';
 import 'package:google_fonts/google_fonts.dart';
 

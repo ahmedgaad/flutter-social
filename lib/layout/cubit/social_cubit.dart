@@ -171,17 +171,17 @@ class SocialCubit extends Cubit<SocialStates> {
     UserModel model = UserModel(
       name: name,
       phone: phone,
-      image: image ?? userModel?.image,
+      image: image ?? userModel!.image,
       // ?? => that's means '== null'
-      cover: cover ?? userModel?.cover,
-      email: userModel?.email,
-      uId: userModel?.uId,
+      cover: cover ?? userModel!.cover,
+      email: userModel!.email,
+      uId: userModel!.uId,
       bio: bio,
       isEmailVerified: false,
     );
     FirebaseFirestore.instance
         .collection('users')
-        .doc(userModel?.uId)
+        .doc(userModel!.uId)
         .update(model.toJson())
         .then((value) {
       getUserData();
@@ -241,9 +241,9 @@ class SocialCubit extends Cubit<SocialStates> {
   }) {
     emit(SocialCreatePostLoadingState());
     PostModel postModel = PostModel(
-        name: userModel?.name,
-        uId: userModel?.uId,
-        image: userModel?.image,
+        name: userModel!.name,
+        uId: userModel!.uId,
+        image: userModel!.image,
         dateTime: dateTime,
         text: text,
         postImage: postImage ?? '');
@@ -288,7 +288,7 @@ class SocialCubit extends Cubit<SocialStates> {
     if (users.length == 0)
       FirebaseFirestore.instance.collection('users').get().then((value) {
         value.docs.forEach((element) {
-          if (element.data()['uId'] != userModel?.uId)
+          if (element.data()['uId'] == userModel!.uId)
             users.add(UserModel.fromJson(element.data()));
         });
         emit(SocialGetAllUsersSuccessState());
@@ -302,7 +302,7 @@ class SocialCubit extends Cubit<SocialStates> {
         .collection('posts')
         .doc(postId)
         .collection('likes')
-        .doc(userModel?.uId)
+        .doc(userModel!.uId)
         .set({
       'like': true,
     }).then((value) {
@@ -313,22 +313,22 @@ class SocialCubit extends Cubit<SocialStates> {
   }
 
   void sendMessage({
-    required String recieverId,
+    required String receiverId,
     required String dateTime,
     required String text,
   }) {
     MessageModel messageModel = MessageModel(
-      senderId: userModel?.uId,
-      recieverId: recieverId,
+      senderId: userModel!.uId,
+      receiverId: receiverId,
       dateTime: dateTime,
       text: text,
     );
     //my chats
     FirebaseFirestore.instance
         .collection('users')
-        .doc(userModel?.uId)
+        .doc(userModel!.uId)
         .collection('chats')
-        .doc(recieverId)
+        .doc(receiverId)
         .collection('messages')
         .add(messageModel.toJson())
         .then((value) {
@@ -337,12 +337,12 @@ class SocialCubit extends Cubit<SocialStates> {
       emit(SocialSendMessageErrorState());
     });
 
-    //reciever chats
+    //receiver chats
     FirebaseFirestore.instance
         .collection('users')
-        .doc(recieverId)
+        .doc(receiverId)
         .collection('chats')
-        .doc(userModel?.uId)
+        .doc(userModel!.uId)
         .collection('messages')
         .add(messageModel.toJson())
         .then((value) {
@@ -354,13 +354,13 @@ class SocialCubit extends Cubit<SocialStates> {
 
   List<MessageModel> messages = [];
   void getMessage({
-    required String recieverId,
+    required String receiverId,
   }) {
     FirebaseFirestore.instance
         .collection('users')
-        .doc(userModel?.uId)
+        .doc(userModel!.uId)
         .collection('chats')
-        .doc(recieverId)
+        .doc(receiverId)
         .collection('messages')
         .orderBy('dateTime')
         .snapshots()

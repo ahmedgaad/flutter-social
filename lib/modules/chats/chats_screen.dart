@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_social/layout/cubit/social_cubit.dart';
-import 'package:flutter_social/layout/cubit/social_cubit.dart';
 import 'package:flutter_social/layout/cubit/social_state.dart';
 import 'package:flutter_social/modules/chats/widgets/build_chat_item.dart';
 import 'package:flutter_social/shared/components_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({super.key});

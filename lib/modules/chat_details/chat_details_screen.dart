@@ -16,14 +16,17 @@ class ChatDetailsScreen extends StatelessWidget {
 
   final UserModel userModel;
   TextEditingController textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       SocialCubit.get(context).getMessage(
-        recieverId: userModel.uId!,
+        receiverId: userModel.uId,
       );
       return BlocConsumer<SocialCubit, SocialStates>(
-        listener: (BuildContext context, state) {},
+        listener: (BuildContext context, state) {
+          //TODO
+        },
         builder: (BuildContext context, state) {
           return Scaffold(
             appBar: AppBar(
@@ -43,13 +46,15 @@ class ChatDetailsScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 20.0,
-                    backgroundImage: NetworkImage('${userModel.image}'),
+                    backgroundImage: NetworkImage(
+                      userModel.image,
+                    ),
                   ),
                   const SizedBox(
                     width: 15.0,
                   ),
                   Text(
-                    '${userModel.name}',
+                    userModel.name,
                     style: GoogleFonts.andika(
                         fontWeight: FontWeight.w700,
                         fontSize: 16.0,
@@ -85,7 +90,9 @@ class ChatDetailsScreen extends StatelessWidget {
                                 messageModel: message,
                               );
                             }
-                            return BuildMyMessageItem(messageModel: message,);
+                            return BuildMyMessageItem(
+                              messageModel: message,
+                            );
                           },
                           separatorBuilder: (context, index) => const SizedBox(
                             height: 15.0,
@@ -121,7 +128,7 @@ class ChatDetailsScreen extends StatelessWidget {
                               child: MaterialButton(
                                 onPressed: () {
                                   SocialCubit.get(context).sendMessage(
-                                    recieverId: userModel.uId!,
+                                    receiverId: userModel.uId,
                                     dateTime: DateTime.now().toString(),
                                     text: textController.text,
                                   );

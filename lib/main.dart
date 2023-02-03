@@ -6,45 +6,42 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_social/layout/cubit/social_cubit.dart';
 import 'package:flutter_social/layout/social_layout.dart';
-import 'package:flutter_social/modules/native_code.dart';
 import 'package:flutter_social/shared/components_manager.dart';
 import 'package:flutter_social/shared/constants_manager.dart';
 import 'package:flutter_social/shared/local/cache_helper.dart';
 import 'bloc_observer.dart';
 import 'modules/login/login_screen.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 void main() async {
   print("--main");
   WidgetsFlutterBinding.ensureInitialized();
-  print('-- WidgetsFlutterBinding.ensureInitialized');
-
+  print('--main: WidgetsFlutterBinding.ensureInitialized');
   Bloc.observer = MyBlocObserver();
-
   await Firebase.initializeApp();
   print('-- main: Firebase.initializeApp');
 
-  var token = await FirebaseMessaging.instance.getToken();
-  print('-- token of device is: $token');
+/*  var token = await FirebaseMessaging.instance.getToken();
+  print('-- token of device is: $token');*/
 
   //foreground fcm
-  FirebaseMessaging.onMessage.listen((event) {
+  /* FirebaseMessaging.onMessage.listen((event) {
     print('-- on message');
     print(event.data.toString());
     showToast(text: 'on message', state: ToastStates.SUCCESS);
-  });
+  });*/
 
   //when click on notification to open the app
-  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+  /*  FirebaseMessaging.onMessageOpenedApp.listen((event) {
     print('-- on message opened');
     print(event.data.toString());
     showToast(text: 'on message opened', state: ToastStates.SUCCESS);
-  });
+  });*/
 
   //background fcm
-  FirebaseMessaging.onBackgroundMessage(
+/*  FirebaseMessaging.onBackgroundMessage(
     _firebaseMessagingBackgroundHandler,
-  );
+  );*/
 
   await CacheHelper.init();
   Widget? widget;
@@ -81,7 +78,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: "Social",
-            home: NativeCode(),
+            home: startWidget,
           );
         },
       ),

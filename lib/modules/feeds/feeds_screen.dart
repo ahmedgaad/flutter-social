@@ -1,7 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_social/shared/styles/icon_broken.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../layout/cubit/social_cubit.dart';
@@ -19,7 +18,8 @@ class FeedsScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: SocialCubit.get(context).posts.length > 0 ,
+          condition: SocialCubit.get(context).posts.isNotEmpty &&
+              SocialCubit.get(context).userModel != null,
           builder: (BuildContext context) {
             return SingleChildScrollView(
               physics: const BouncingScrollPhysics(),

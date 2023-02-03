@@ -25,9 +25,9 @@ class EditProfileScreen extends StatelessWidget {
         var userModel = SocialCubit.get(context).userModel;
         var profileImage = SocialCubit.get(context).profileImage;
         var coverImage = SocialCubit.get(context).coverImage;
-        nameController.text = userModel!.name!;
-        bioController.text = userModel.bio!;
-        phoneController.text = userModel.phone!;
+        nameController.text = userModel!.name;
+        bioController.text = userModel.bio;
+        phoneController.text = userModel.phone;
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -93,8 +93,9 @@ class EditProfileScreen extends StatelessWidget {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: coverImage == null
-                                        ? NetworkImage("${userModel.cover}")
-                                            as ImageProvider
+                                        ? NetworkImage(
+                                            userModel.cover,
+                                          ) as ImageProvider
                                         : FileImage(coverImage),
                                   ),
                                   borderRadius: const BorderRadius.only(
@@ -132,8 +133,9 @@ class EditProfileScreen extends StatelessWidget {
                               child: CircleAvatar(
                                 radius: 60,
                                 backgroundImage: profileImage == null
-                                    ? NetworkImage('${userModel.image}')
-                                        as ImageProvider
+                                    ? NetworkImage(
+                                        userModel.image,
+                                      ) as ImageProvider
                                     : FileImage(profileImage),
                               ),
                             ),

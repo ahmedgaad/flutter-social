@@ -24,7 +24,7 @@ class BuildChatItem extends StatelessWidget {
             CircleAvatar(
               radius: 30.0,
               backgroundImage: NetworkImage(
-                "${userModel.image}",
+                userModel.image,
               ),
             ),
             const SizedBox(
@@ -33,7 +33,7 @@ class BuildChatItem extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '${userModel.name}',
+                  userModel.name,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: GoogleFonts.andika(

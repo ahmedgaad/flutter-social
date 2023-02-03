@@ -47,7 +47,7 @@ class BuildPostItem extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    '${postModel.name}',
+                                    postModel.name,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                     style: GoogleFonts.andika(
@@ -66,7 +66,7 @@ class BuildPostItem extends StatelessWidget {
                                 ],
                               ),
                               Text(
-                                "${postModel.dateTime}",
+                                postModel.dateTime,
                                 style: Theme.of(context).textTheme.bodySmall,
                               )
                             ],
@@ -93,7 +93,7 @@ class BuildPostItem extends StatelessWidget {
                     ///text of post
                     ///
                     Text(
-                      "${postModel.text}",
+                      postModel.text,
                       style: GoogleFonts.poppins(),
                     ),
 

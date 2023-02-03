@@ -1,18 +1,18 @@
 class PostModel {
-  String? name;
-  String? uId;
-  String? image;
-  String? dateTime;
-  String? text;
-  String? postImage;
+  late String name;
+  late String uId;
+  late String image;
+  late String dateTime;
+  late String text;
+  late String postImage;
 
   PostModel({
-    this.name,
-    this.uId,
-    this.image,
-    this.dateTime,
-    this.text,
-    this.postImage,
+    required this.name,
+    required this.uId,
+    required this.image,
+    required this.dateTime,
+    required this.text,
+    required this.postImage,
   });
 
   PostModel.fromJson(Map<String, dynamic> json) {

@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +22,7 @@ class LoginCubit extends Cubit<LoginStates> {
     ).then((value){
       print(value.user?.email);
       print(value.user?.uid);
-      emit(LoginSuccessState(value.user?.uid));
+      emit(LoginSuccessState(value.user!.uid));
     }).catchError((error){
       emit(LoginErrorState(error.toString()));
     });
